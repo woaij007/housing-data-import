@@ -1,0 +1,11 @@
+{
+  "name": "housing-data-import",
+  "version": "1.0.0",
+  "description": "use scripts to import apartments from data of third parties ",
+  "main": "import.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cola",
+  "license": "ISC"
+}
