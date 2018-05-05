@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const credential = require('./credential.json');
+var Schema = mongoose.Schema;
+mongoose.connect(credential.mongolab.prod);
 
-mongoose.connect(credential.mongolab.dev);
-
-const PendingApartment = mongoose.model('PendingApartment', {
+var pendingApartmentSchema = new Schema({
     createTime: { type: Date, default: Date.now },
     name: String,
     country: { type: String, default: 'United States'},
@@ -17,9 +17,14 @@ const PendingApartment = mongoose.model('PendingApartment', {
     enableApply: { type: Boolean, default: true},
     contractType: { type: String, default: 'A: Pay per Lease'},
     officialWebsite: String
-});
+}, { collection: 'pendingApartment'});
 
-const FloorPlan = mongoose.model('FloorPlan', {
+const PendingApartment = mongoose.model('PendingApartment', pendingApartmentSchema);
+
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
+
+var floorPlanSchema = new Schema({
     createTime: { type: Date, default: Date.now },
     name: String,
     name_zh: String,
@@ -28,8 +33,10 @@ const FloorPlan = mongoose.model('FloorPlan', {
     availability: { type: String, default: 'Available'},
     availability_zh: { type: String, default: '尚有空房'},
     marketRate: Number,
-    apartmentId: Schema.Types.ObjectId
-});
+    apartmentId: { type: ObjectId, required: true }
+}, { collection: 'floorPlan'});
+
+const FloorPlan = mongoose.model('FloorPlan', floorPlanSchema);
 
 module.exports = function(apartmentData) {
     var pendingApartment = {

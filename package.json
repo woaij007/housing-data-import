@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "crawler": "^1.1.2",
+    "mongoose": "^5.0.17",
     "xlsx": "^0.12.11"
   }
 }
